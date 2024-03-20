@@ -2,6 +2,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 
+//https://www.w3docs.com/snippets/java/how-to-add-an-image-to-a-jpanel.html
+//540x540 chess board
+
 public class mainWindow extends JFrame{
     public static void main(String[] args){
         mainWindow window = new mainWindow("Chess");
