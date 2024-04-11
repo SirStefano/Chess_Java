@@ -50,6 +50,7 @@ public class mainWindow extends JFrame{
         //do wywalenia
         add(t1, BorderLayout.SOUTH);
         add(cb1, BorderLayout.EAST);
+
         add(cb2, BorderLayout.NORTH);
         add(cb3, BorderLayout.WEST);
         //do tego miejsca

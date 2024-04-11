@@ -6,7 +6,7 @@ import java.awt.*;
 public class panelsWithCoordinates extends JPanel {
     JLabel[] coordinates = new JLabel[8];
     public panelsWithCoordinates(char begin){
-        super(new FlowLayout(FlowLayout.CENTER, 40, 19));
+        super(new FlowLayout(FlowLayout.CENTER, 46, 19));
         for(int i = 0; i<8; ++i){
             coordinates[i] = new JLabel(Character.toString((int)begin+i), SwingConstants.CENTER);
             coordinates[i].setFont(new Font("Serif", Font.PLAIN, 30));
