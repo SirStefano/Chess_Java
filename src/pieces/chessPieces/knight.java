@@ -9,4 +9,8 @@ public class knight extends prebuildChessPiece {
         super(_pieceVector,"Knight", _Color);
         letter = 'N';
     }
+
+    public knight deepClone(){
+        return new knight(pieceVector.deepClone(), pieceColor);
+    }
 }

@@ -9,4 +9,8 @@ public class queen extends prebuildChessPiece {
         super(_pieceVector, "Queen", _Color);
         letter = 'Q';
     }
+
+    public queen deepClone() {
+        return new queen(pieceVector.deepClone(), pieceColor);
+    }
 }

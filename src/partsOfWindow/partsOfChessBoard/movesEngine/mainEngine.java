@@ -176,23 +176,70 @@ public class mainEngine {
             for(int y = -1; y<2; ++y){
                 if(checkBoardBorders(piece.getPieceVector().add(new chessVector(x, y)))) {
                     if (emptySquare(piece.getPieceVector().add(new chessVector(x, y)), pieces, piece.pieceColor)) {
-                        pieces[piece.getPieceVector().add(new chessVector(x, y)).getX()][piece.getPieceVector().add(new chessVector(x, y)).getY()].setBorders();
+                        if(!checkCheckWithForwardMove(pieces, piece.getPieceVector().add(new chessVector(x, y)), piece.pieceColor))
+                            pieces[piece.getPieceVector().add(new chessVector(x, y)).getX()]
+                                [piece.getPieceVector().add(new chessVector(x, y)).getY()].setBorders();
                     } else if (enemy(piece.getPieceVector().add(new chessVector(x, y)), pieces, piece.pieceColor)) {
-                        ((prebuildChessPiece) pieces[piece.getPieceVector().add(new chessVector(x, y)).getX()][piece.getPieceVector()
+                        if(!checkCheckWithForwardMove(pieces, piece.getPieceVector().add(new chessVector(x, y)), piece.pieceColor))
+                            ((prebuildChessPiece) pieces[piece.getPieceVector().add(new chessVector(x, y)).getX()][piece.getPieceVector()
                                 .add(new chessVector(x, y)).getY()]).killBorders();
                     }
                 }
             }
         }
     }
-    public static boolean check(){
-        return true;
+    public static boolean checkCheckWithForwardMove(prebuildPiece[][] pieces, chessVector kingDestiny, color kingColor){
+        prebuildPiece[][] copyPieces = copyChessBoard(pieces);
+        chessVector kingVector = findKing(copyPieces, kingColor);
+        copyPieces[kingDestiny.getX()][kingDestiny.getY()] = copyPieces[kingVector.getX()][kingVector.getY()];
+        copyPieces[kingDestiny.getX()][kingDestiny.getY()].getPieceVector().setX(kingDestiny.getX());
+        copyPieces[kingDestiny.getX()][kingDestiny.getY()].getPieceVector().setY(kingDestiny.getY());
+        copyPieces[kingVector.getX()][kingVector.getY()] = new emptyPiece(new chessVector(kingVector.getX(), kingVector.getY()));
+        return check(kingColor, copyPieces);
+    }
+    public static boolean check(color pieceColor ,prebuildPiece[][] pieces){
+        prebuildChessPiece forMoment = focusPiece;
+        for(int x = 0; x<8; ++x) {
+            for (int y = 0; y<8; ++y) {
+                if (pieces[x][y].pieceColor != pieceColor && pieces[x][y].pieceColor != color.NONE) {
+                    checkInstanceOf((prebuildChessPiece) pieces[x][y], pieces);
+                }
+            }
+        }
+        focusPiece = forMoment;
+        chessVector king = findKing(pieces, pieceColor);
+        if(pieces[king.getX()][king.getY()].isOpaque()){
+            return true;
+        }
+        return false;
     }
     public static boolean pat(){
         return true;
     }
+    private static prebuildPiece[][] copyChessBoard(prebuildPiece[][] pieces){
+        prebuildPiece[][] piecesCopy = new prebuildPiece[8][8];
+        for(int x = 0; x<8; ++x){
+            for(int y = 0; y<8; ++y){
+                piecesCopy[x][y] = pieces[x][y].deepClone();
+            }
+        }
+        return piecesCopy;
+    }
+    private static chessVector findKing(prebuildPiece[][] pieces, color kingColor){
+        chessVector kingVector = null;
+        outer:
+        for(int x = 0; x<8; ++x){
+            for(int y = 0; y<8; ++y){
+                if(pieces[x][y] instanceof king && ((king) pieces[x][y]).pieceColor == kingColor){
+                    kingVector = new chessVector(x, y);
+                    break outer;
+                }
+            }
+        }
+        return kingVector;
+    }
     public static boolean checkmate(){
-        return (pat() && check());
+        return true;
     }
     private static boolean sameLikeAttacking(chessVector square, prebuildPiece[][] pieces, color pieceColor){
         return pieces[square.getX()][square.getY()].pieceColor == pieceColor;

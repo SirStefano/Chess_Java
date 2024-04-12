@@ -28,5 +28,5 @@ public abstract class prebuildPiece extends JButton {
     public void clearBorders(){
         setBorderPainted(false);
     }
-
+    public abstract prebuildPiece deepClone();
 }

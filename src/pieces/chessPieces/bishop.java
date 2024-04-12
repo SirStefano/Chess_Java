@@ -9,4 +9,7 @@ public class bishop extends prebuildChessPiece{
         super(_pieceVector, "Bishop", _Color);
         letter = 'B';
     }
+    public bishop deepClone(){
+        return new bishop(pieceVector.deepClone(), pieceColor);
+    }
 }

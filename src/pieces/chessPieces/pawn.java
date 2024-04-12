@@ -8,4 +8,8 @@ public class pawn extends prebuildChessPiece{
         super(_pieceVector, "Pawn", _Color);
         letter = '0';
     }
+
+    public pawn deepClone(){
+        return new pawn(pieceVector.deepClone(), pieceColor);
+    }
 }

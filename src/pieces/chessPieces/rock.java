@@ -9,4 +9,8 @@ public class rock extends prebuildChessPiece{
         super(_pieceVector, "Rock", _Color);
         letter = 'R';
     }
+
+    public rock deepClone(){
+        return new rock(pieceVector.deepClone(), pieceColor);
+    }
 }

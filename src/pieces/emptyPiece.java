@@ -9,4 +9,7 @@ public class emptyPiece extends prebuildPiece{
         super(_pieceVector, color.NONE);
     }
 
+    public emptyPiece deepClone(){
+        return new emptyPiece(pieceVector.deepClone());
+    }
 }
