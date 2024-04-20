@@ -1,4 +1,4 @@
-package partsOfWindow.partsOfChessBoard;
+package partsOfWindow.possibilitiesForMainArea.partsOfChessBoard;
 
 import javax.swing.*;
 import java.awt.*;

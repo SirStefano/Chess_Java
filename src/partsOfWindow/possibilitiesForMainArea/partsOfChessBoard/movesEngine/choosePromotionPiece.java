@@ -1,4 +1,4 @@
-package partsOfWindow.partsOfChessBoard.movesEngine;
+package partsOfWindow.possibilitiesForMainArea.partsOfChessBoard.movesEngine;
 
 import pieces.chessPieces.*;
 import pieces.components.chessVector;
@@ -6,7 +6,6 @@ import pieces.prebuildChessPiece;
 import pieces.components.color;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class choosePromotionPiece extends JDialog {
     private prebuildChessPiece[] buttons = new prebuildChessPiece[4];

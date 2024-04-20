@@ -1,4 +1,4 @@
-package partsOfWindow.partsOfChessBoard.movesEngine;
+package partsOfWindow.possibilitiesForMainArea.partsOfChessBoard.movesEngine;
 
 import pieces.prebuildChessPiece;
 

@@ -1,27 +1,27 @@
-package partsOfWindow;
+package partsOfWindow.possibilitiesForMainArea;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import partsOfWindow.partsOfChessBoard.*;
-import partsOfWindow.partsOfChessBoard.movesEngine.mainEngine;
+import partsOfWindow.mainArea;
+import partsOfWindow.possibilitiesForMainArea.partsOfChessBoard.*;
+import partsOfWindow.possibilitiesForMainArea.partsOfChessBoard.movesEngine.mainEngine;
 import pieces.components.color;
 import pieces.prebuildChessPiece;
 import pieces.prebuildPiece;
 
-import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 
 public class chessBoard extends JPanel implements MouseListener {
+    private final mainArea precursor;
     private board chessBoardImage;
     private panelsWithCoordinates vertical;
     private panelsWithCoordinates horizontal;
     private color side;
-    public chessBoard(){
+    public chessBoard(mainArea area){
         super(null);
         setBounds(0, 0, 542,542); //do poprawy
+        precursor = area;
         init();
     }
     private void init(){
@@ -44,6 +44,12 @@ public class chessBoard extends JPanel implements MouseListener {
         horizontal.setBounds(60, 482, 482, 60);
         add(horizontal);
     }
+    private void changeSide(){
+        if(side == color.WHITE)
+            side = color.BLACK;
+        else
+            side = color.WHITE;
+    }
     public void mouseEntered(MouseEvent evt) {
     }
 
@@ -52,19 +58,32 @@ public class chessBoard extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent evt) {
         prebuildPiece button = (prebuildPiece) evt.getComponent();
         if(button.pieceColor == side){
-            //te przyciski bazowo aktywne
             chessBoardImage.clearBorders();
             mainEngine.checkInstanceOf((prebuildChessPiece) button, chessBoardImage.getPieces());
             chessBoardImage.hidePieces();
-            chessBoardImage.showPieces(true);
+            chessBoardImage.showPieces(side);
         }else if(button.isBorderPainted()){
-            //ruch pionka
-            mainEngine.makingMove(button, chessBoardImage.getPieces());
-            chessBoardImage.clearBorders();
-            chessBoardImage.hidePieces();
-            chessBoardImage.showPieces(true);
-        }else{
-            //nic skoro nie pasuje do kolora ani nie jest polem wyboru (:
+            if(mainEngine.makingMove(button, chessBoardImage.getPieces())) {
+                chessBoardImage.clearBorders();
+                chessBoardImage.hidePieces();
+                chessBoardImage.showPieces(side);
+                changeSide();
+                if(mainEngine.pat(chessBoardImage.getPieces(), side)){
+                    System.out.println("Pat");
+                }
+                chessBoardImage.clearBorders();
+                chessBoardImage.hidePieces();
+                horizontal.rotate();
+                vertical.rotate();
+                chessBoardImage.showPieces(side);
+                if(mainEngine.check(side, mainEngine.copyChessBoard(chessBoardImage.getPieces()))){
+                    if(mainEngine.pat(chessBoardImage.getPieces(), side)){
+                        System.out.println("Mat");
+                    }
+                    chessBoardImage.getPieces()[mainEngine.findKing(chessBoardImage.getPieces(), side).getX()]
+                            [mainEngine.findKing(chessBoardImage.getPieces(), side).getY()].setOpaque(true);
+                }
+            }
         }
     }
     public void mousePressed(MouseEvent evt) {

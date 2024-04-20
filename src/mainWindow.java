@@ -1,10 +1,9 @@
-import modifiedComponents.panelWithBackground;
-import partsOfWindow.chessBoard;
+import partsOfWindow.mainArea;
+import partsOfWindow.possibilitiesForMainArea.mainMenu;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 //https://docs.oracle.com/javase%2Ftutorial%2Fuiswing%2F%2F/layout/none.html
 //540x540 chess board
@@ -16,6 +15,9 @@ public class mainWindow extends JFrame{
         window.setVisible(true);
     }
 
+    public void mat(){
+        System.out.println("Jesteśmy w domu");
+    }
     mainWindow(String title){
         super(title);
     }
@@ -32,11 +34,8 @@ public class mainWindow extends JFrame{
         //do tego miejsca
 
         //próbny poniżej
-        JPanel jpp = new JPanel(null);
+        mainArea jpp = new mainArea();
 
-        chessBoard mainBoard = new chessBoard();
-
-        jpp.add(mainBoard); //jp ma być środkowane (: i jakaś grafika w tle
 
 
         JButton cb4 = new JButton();

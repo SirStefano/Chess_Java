@@ -1,4 +1,4 @@
-package partsOfWindow.partsOfChessBoard;
+package partsOfWindow.possibilitiesForMainArea.partsOfChessBoard;
 
 import pieces.chessPieces.*;
 import modifiedComponents.panelWithBackground;
@@ -12,10 +12,10 @@ import java.awt.*;
 public class board extends panelWithBackground {
     private prebuildPiece[][] pieces = new prebuildPiece[8][8];
     public board(){
-        super(new GridLayout(8, 8), "../../chess_board/board.png");
+        super(new GridLayout(8, 8), "../../../chess_board/board.png");
         setBounds(60, 0, 482, 482);
         init();
-        showPieces(true);
+        showPieces(color.WHITE);
     }
     public void init(){
         pieces[0][7] = new rock(new chessVector(0,7), color.BLACK);
@@ -46,8 +46,8 @@ public class board extends panelWithBackground {
         pieces[3][0] = new queen(new chessVector(3,0),color.WHITE);
         pieces[4][0] = new king(new chessVector(4,0),color.WHITE);
     }
-    public void showPieces(boolean side){ //1 for white side
-        if(side){
+    public void showPieces(color side){ //1 for white side
+        if(side == color.WHITE){
             for(int y = 7; y>=0; --y){
                 for(int x = 0; x<8; ++x){
                     add(pieces[x][y]);
