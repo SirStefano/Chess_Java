@@ -274,12 +274,12 @@ public class mainEngine {
                         chessVector pieceVector = pieces[x][y].getPieceVector();
                         for(int i = pieceVector.getX()+1; i<8; ++i){
                             if(emptySquare(new chessVector(i, pieceVector.getY()), pieces, pieces[x][y].pieceColor)){
-                                if(!(checkCheckWithForwardMove(pieces, pieceVector, pieceVector.add(new chessVector(i, 0)), pieces[x][y].pieceColor))){
+                                if(!(checkCheckWithForwardMove(pieces, pieceVector, new chessVector(i, pieceVector.getY()), pieces[x][y].pieceColor))){
                                     return false;
                                 }
                             }else{
                                 if(enemy(new chessVector(i, pieceVector.getY()), pieces, pieces[x][y].pieceColor)){
-                                    if(!(checkCheckWithForwardMove(pieces, pieceVector, pieceVector.add(new chessVector(i, 0)), pieces[x][y].pieceColor))){
+                                    if(!(checkCheckWithForwardMove(pieces, pieceVector, new chessVector(i, pieceVector.getY()), pieces[x][y].pieceColor))){
                                         return false;
                                     }
                                 }
@@ -288,12 +288,12 @@ public class mainEngine {
                         }
                         for(int i = pieceVector.getX()-1; i>=0; --i){
                             if(emptySquare(new chessVector(i, pieceVector.getY()), pieces, pieces[x][y].pieceColor)){
-                                if(!checkCheckWithForwardMove(pieces, pieceVector, pieceVector.add(new chessVector(i, 0)), pieces[x][y].pieceColor)){
+                                if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(i, pieceVector.getY()), pieces[x][y].pieceColor)){
                                     return false;
                                 }
                             }else{
                                 if(enemy(new chessVector(i, pieceVector.getY()), pieces, pieces[x][y].pieceColor)){
-                                    if(!checkCheckWithForwardMove(pieces, pieceVector, pieceVector.add(new chessVector(i, 0)), pieces[x][y].pieceColor)){
+                                    if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(i, pieceVector.getY()), pieces[x][y].pieceColor)){
                                         return false;
                                     }
                                 }
@@ -302,12 +302,12 @@ public class mainEngine {
                         }
                         for(int i = pieceVector.getY()+1; i<8; ++i){
                             if(emptySquare(new chessVector(pieceVector.getX(), i), pieces, pieces[x][y].pieceColor)){
-                                if(!checkCheckWithForwardMove(pieces, pieceVector, pieceVector.add(new chessVector(0, i)), pieces[x][y].pieceColor)){
+                                if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(pieceVector.getX(), i), pieces[x][y].pieceColor)){
                                     return false;
                                 }
                             }else{
                                 if(enemy(new chessVector(pieceVector.getX(), i), pieces, pieces[x][y].pieceColor)){
-                                    if(!checkCheckWithForwardMove(pieces, pieceVector, pieceVector.add(new chessVector(0, i)), pieces[x][y].pieceColor)){
+                                    if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(pieceVector.getX(), i), pieces[x][y].pieceColor)){
                                         return false;
                                     }
                                 }
@@ -316,12 +316,12 @@ public class mainEngine {
                         }
                         for(int i = pieceVector.getY()-1; i>=0; --i){
                             if(emptySquare(new chessVector(pieceVector.getX(), i), pieces, pieces[x][y].pieceColor)){
-                                if(!checkCheckWithForwardMove(pieces, pieceVector, pieceVector.add(new chessVector(0, i)), pieces[x][y].pieceColor)){
+                                if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(pieceVector.getX(), i), pieces[x][y].pieceColor)){
                                     return false;
                                 }
                             }else{
                                 if(enemy(new chessVector(pieceVector.getX(), i), pieces, pieces[x][y].pieceColor)){
-                                    if(!checkCheckWithForwardMove(pieces, pieceVector, pieceVector.add(new chessVector(0, i)), pieces[x][y].pieceColor)){
+                                    if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(pieceVector.getX(), i), pieces[x][y].pieceColor)){
                                         return false;
                                     }
                                 }
@@ -367,12 +367,54 @@ public class mainEngine {
                         chessVector pieceVector = pieces[x][y].getPieceVector();
                         for(int i = pieceVector.getX()+1; i<8; ++i){
                             if(emptySquare(new chessVector(i, pieceVector.getY()), pieces, pieces[x][y].pieceColor)){
-                                if(!checkCheckWithForwardMove(pieces, pieceVector, pieceVector.add(new chessVector(i, 0)), pieces[x][y].pieceColor)){
+                                if(!(checkCheckWithForwardMove(pieces, pieceVector, new chessVector(i, pieceVector.getY()), pieces[x][y].pieceColor))){
                                     return false;
                                 }
                             }else{
                                 if(enemy(new chessVector(i, pieceVector.getY()), pieces, pieces[x][y].pieceColor)){
-                                    if(!checkCheckWithForwardMove(pieces, pieceVector, pieceVector.add(new chessVector(i, 0)), pieces[x][y].pieceColor)){
+                                    if(!(checkCheckWithForwardMove(pieces, pieceVector, new chessVector(i, pieceVector.getY()), pieces[x][y].pieceColor))){
+                                        return false;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        for(int i = pieceVector.getX()-1; i>=0; --i){
+                            if(emptySquare(new chessVector(i, pieceVector.getY()), pieces, pieces[x][y].pieceColor)){
+                                if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(i, pieceVector.getY()), pieces[x][y].pieceColor)){
+                                    return false;
+                                }
+                            }else{
+                                if(enemy(new chessVector(i, pieceVector.getY()), pieces, pieces[x][y].pieceColor)){
+                                    if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(i, pieceVector.getY()), pieces[x][y].pieceColor)){
+                                        return false;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        for(int i = pieceVector.getY()+1; i<8; ++i){
+                            if(emptySquare(new chessVector(pieceVector.getX(), i), pieces, pieces[x][y].pieceColor)){
+                                if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(pieceVector.getX(), i), pieces[x][y].pieceColor)){
+                                    return false;
+                                }
+                            }else{
+                                if(enemy(new chessVector(pieceVector.getX(), i), pieces, pieces[x][y].pieceColor)){
+                                    if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(pieceVector.getX(), i), pieces[x][y].pieceColor)){
+                                        return false;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        for(int i = pieceVector.getY()-1; i>=0; --i){
+                            if(emptySquare(new chessVector(pieceVector.getX(), i), pieces, pieces[x][y].pieceColor)){
+                                if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(pieceVector.getX(), i), pieces[x][y].pieceColor)){
+                                    return false;
+                                }
+                            }else{
+                                if(enemy(new chessVector(pieceVector.getX(), i), pieces, pieces[x][y].pieceColor)){
+                                    if(!checkCheckWithForwardMove(pieces, pieceVector, new chessVector(pieceVector.getX(), i), pieces[x][y].pieceColor)){
                                         return false;
                                     }
                                 }

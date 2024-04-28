@@ -68,9 +68,6 @@ public class chessBoard extends JPanel implements MouseListener {
                 chessBoardImage.hidePieces();
                 chessBoardImage.showPieces(side);
                 changeSide();
-                if(mainEngine.pat(chessBoardImage.getPieces(), side)){
-                    System.out.println("Pat");
-                }
                 chessBoardImage.clearBorders();
                 chessBoardImage.hidePieces();
                 horizontal.rotate();
@@ -79,6 +76,7 @@ public class chessBoard extends JPanel implements MouseListener {
                 if(mainEngine.check(side, mainEngine.copyChessBoard(chessBoardImage.getPieces()))){
                     if(mainEngine.pat(chessBoardImage.getPieces(), side)){
                         System.out.println("Mat");
+                        precursor.initEndGameMenu("Check mate");
                     }
                     chessBoardImage.getPieces()[mainEngine.findKing(chessBoardImage.getPieces(), side).getX()]
                             [mainEngine.findKing(chessBoardImage.getPieces(), side).getY()].setOpaque(true);

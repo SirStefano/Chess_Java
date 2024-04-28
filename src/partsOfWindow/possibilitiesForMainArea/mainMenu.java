@@ -28,7 +28,8 @@ public class mainMenu extends JPanel implements MouseListener {
             x.addMouseListener(this);
             add(x);
         }
-        setBounds(0, 0, 180, 800);
+        setBounds(precursor.getSize().width/2-90, precursor.getSize().height/2-400, 180, 800);
+        System.out.println(precursor.getSize().getHeight());
     }
 
     public void mouseEntered(MouseEvent evt) {
