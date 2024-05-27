@@ -8,6 +8,7 @@ import pieces.prebuildChessPiece;
 import pieces.prebuildPiece;
 
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class mainEngine {
     private static prebuildChessPiece focusPiece;
@@ -30,7 +31,8 @@ public class mainEngine {
             kingMove((king) piece, pieces);
         }
     }
-    public static boolean makingMove(prebuildPiece piece, prebuildPiece[][] pieces){
+    public static boolean makingMove(prebuildPiece piece, prebuildPiece[][] pieces,
+                                     ArrayList<String> white, ArrayList<String> black){
         if(!checkCheckWithForwardMove(pieces, focusPiece.getPieceVector() ,piece.getPieceVector(), focusPiece.pieceColor)) {
             if (focusPiece instanceof pawn && (piece.getPieceVector().getY() == 7 || piece.getPieceVector().getY() == 0)) {
                 choosePromotionPiece chooseWindow = new choosePromotionPiece(focusPiece.pieceColor);
@@ -45,6 +47,16 @@ public class mainEngine {
                 if (focusPiece instanceof pawn) {
                     focusPiece = forWindow.changePiece(new queen(new chessVector(0, 0), focusPiece.pieceColor));
                 }
+            }
+            String move = focusPiece.getLetter()+focusPiece.getPieceVector().chessNotation();
+            if(enemy(piece.getPieceVector(), pieces, focusPiece.pieceColor)){
+                move += 'x';
+            }
+            move += piece.getPieceVector().chessNotation();
+            if(focusPiece.pieceColor == color.WHITE){
+                white.add(move);
+            }else{
+                black.add(move);
             }
             pieces[piece.getPieceVector().getX()][piece.getPieceVector().getY()] = focusPiece;
             pieces[focusPiece.getPieceVector().getX()][focusPiece.getPieceVector().getY()]

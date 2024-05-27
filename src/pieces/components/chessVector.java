@@ -26,7 +26,7 @@ public final class chessVector {
         y = _y;
     }
     public String chessNotation(){
-        return Integer.toString(((char)(97+x)))+(y+1);
+        return Character.toString(((char)(97+x)))+(y+1);
     }
     public chessVector deepClone(){
         return new chessVector(x, y);

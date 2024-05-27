@@ -11,6 +11,7 @@ import pieces.prebuildPiece;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class chessBoard extends JPanel implements MouseListener {
     private final mainArea precursor;
@@ -18,9 +19,9 @@ public class chessBoard extends JPanel implements MouseListener {
     private panelsWithCoordinates vertical;
     private panelsWithCoordinates horizontal;
     private color side;
+    private panelWithMoves chessNotation;
     public chessBoard(mainArea area){
         super(null);
-        setBounds(0, 0, 542,542); //do poprawy
         precursor = area;
         init();
     }
@@ -43,6 +44,11 @@ public class chessBoard extends JPanel implements MouseListener {
         horizontal = new panelsWithCoordinates('a');
         horizontal.setBounds(60, 482, 482, 60);
         add(horizontal);
+
+        chessNotation = new panelWithMoves();
+        JScrollPane panelWithScroll = new JScrollPane(chessNotation);
+        panelWithScroll.setBounds(542, 0, 120, 482);
+        add(panelWithScroll);
     }
     private void changeSide(){
         if(side == color.WHITE)
@@ -63,7 +69,8 @@ public class chessBoard extends JPanel implements MouseListener {
             chessBoardImage.hidePieces();
             chessBoardImage.showPieces(side);
         }else if(button.isBorderPainted()){
-            if(mainEngine.makingMove(button, chessBoardImage.getPieces())) {
+            if(mainEngine.makingMove(button, chessBoardImage.getPieces(),
+                    chessNotation.getWhiteMoves(), chessNotation.getBlackMoves())) {
                 chessBoardImage.clearBorders();
                 chessBoardImage.hidePieces();
                 chessBoardImage.showPieces(side);
@@ -81,6 +88,7 @@ public class chessBoard extends JPanel implements MouseListener {
                     chessBoardImage.getPieces()[mainEngine.findKing(chessBoardImage.getPieces(), side).getX()]
                             [mainEngine.findKing(chessBoardImage.getPieces(), side).getY()].setOpaque(true);
                 }
+                chessNotation.newMove();
             }
         }
     }

@@ -26,7 +26,6 @@ public class endGameMenu extends JPanel implements MouseListener{
         playAgain.addMouseListener(this);
         add(mainManu);
         add(playAgain);
-        setBounds(0, 0, 180, 400);
     }
     public void mouseEntered(MouseEvent evt) {
     }

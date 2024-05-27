@@ -40,5 +40,8 @@ public abstract class prebuildChessPiece extends prebuildPiece{
         setBorder(BorderFactory.createLineBorder(Color.RED, 5, true));
         setBorderPainted(true);
     }
+    public char getLetter(){
+        return letter;
+    }
     public abstract prebuildChessPiece deepClone();
 }

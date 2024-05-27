@@ -1,5 +1,6 @@
 import partsOfWindow.mainArea;
 import partsOfWindow.possibilitiesForMainArea.mainMenu;
+import pieces.components.color;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -54,12 +55,7 @@ public class mainWindow extends JFrame{
         add(cb3, BorderLayout.WEST);
         //do tego miejsca
         add(jpp, BorderLayout.CENTER);
-
-        try {
-            Image img = ImageIO.read(getClass().getResource("./chess_pieces/black/King.png"));
-            cb4.setIcon(new ImageIcon(img));
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+        setVisible(true);
+        jpp.initMainManu();
     }
 }
